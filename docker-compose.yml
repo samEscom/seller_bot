@@ -1,0 +1,13 @@
+services:
+  app-dev:
+    build:
+      context: .
+      dockerfile: deploy/dev/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    environment:
+      - ENV=dev
+    env_file:
+      - .env
