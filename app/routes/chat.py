@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 from app.request.chat import ChatRequest
 from app.response.chat import ChatResponse
+from app.services.llm import ask_gpt
 
 router = APIRouter(
     prefix="/chat",
@@ -12,4 +13,5 @@ router = APIRouter(
 
 @router.post("/", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
-    return ChatResponse(reply="Hello from the chat endpoint!")
+    response = ask_gpt(request.message)
+    return ChatResponse(reply=response)
